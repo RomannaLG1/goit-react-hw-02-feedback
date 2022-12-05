@@ -7,13 +7,13 @@ export const FeedbackStatistics = ({ good, neutral, bad, total, positivePercenta
     <Item>Neutral: {neutral}</Item>
     <Item>Bad: {bad}</Item>
     <Item>Total: {total}</Item>
-    <Item>Positive feedback: {positivePercentage}</Item>
+    <Item>Positive feedback: {positivePercentage} %</Item>
   </List>
 );
 
 FeedbackStatistics.propTypes = {
-  good: PropTypes.number, 
-  neutral:PropTypes.number, 
-  bad:PropTypes.number, total:PropTypes.number, 
-  positivePercentage:PropTypes.string,
+  good: PropTypes.number.isRequired, 
+  neutral:PropTypes.number.isRequired, 
+  bad:PropTypes.number, total:PropTypes.number.isRequired, 
+  positivePercentage:PropTypes.number.isRequired,
 }

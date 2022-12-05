@@ -1,26 +1,33 @@
 import PropTypes from 'prop-types';
-import { StyledButton } from './FeedbackOptions.styled';
+import {
+  BsFillEmojiSunglassesFill,
+  BsFillEmojiExpressionlessFill,
+  BsFillEmojiAngryFill,
+} from 'react-icons/bs';
+import { Button } from './FeedbackOptionsBtn';
 
-export const FeedbackOptions = ({
-  icon: Icon,
-  type = 'button',
-  options,
-  onFeedbackIncrement,
-}) => {
-  return options.map(name => (
-    <StyledButton
-      type={type}
-      name={name}
-      key={name}
-      onClick={onFeedbackIncrement}
-    >
-      {Icon && <Icon size="35" />}
-      {name}
-    </StyledButton>
-  ));
-};
+const iconArray = [
+  <BsFillEmojiSunglassesFill />,
+  <BsFillEmojiExpressionlessFill />,
+  <BsFillEmojiAngryFill />,
+];
+
+export const FeedbackOptions = ({ options, onLeaveFeedback }) =>
+  options.map((name, idx) => {
+    // console.log(name);
+     return (
+      <Button
+        key={name}
+        name={name}
+        onClickHandle={onLeaveFeedback}
+        icon={iconArray[idx]}
+      >
+        {name}
+      </Button>
+    );
+  });
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string),
-  onFeedbackIncrement: PropTypes.func,
-}
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};

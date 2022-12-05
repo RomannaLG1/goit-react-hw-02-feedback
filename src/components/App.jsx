@@ -13,40 +13,40 @@ export class App extends Component {
   };
 
   feedbackIncrement = event => {
-    const { name } = event.currentTarget;
+    const { textContent } = event.currentTarget;
+    const nameBtn = textContent.toLowerCase();
 
-    this.setState(prevState => ({
-     
-        [name]: prevState[name] + 1,
-        
-      
-    }));
-    
+    if (nameBtn) {
+      this.setState(prevState => {
+        return {
+          [nameBtn]: prevState[nameBtn] + 1,
+        };
+      });
+    }
   };
 
   countTotalFeedback = () => {
-     return Object.values(this.state).reduce((acc, stat) => acc + stat, 0);
+    return Object.values(this.state).reduce((acc, stat) => acc + stat, 0);
   };
 
   countPositiveFeedbackPercentage = total => {
-    return (!total ? 0 : ((this.state.good / total) * 100).toFixed(1)) + ' %';
+    return (!total ? 0 : ~~((this.state.good / total) * 100));
   };
   render() {
     const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
     const positivePercentage = this.countPositiveFeedbackPercentage(total);
     return (
-      <Box ml={"auto"} mr={"auto"} as="main" p={5}>
+      <Box display="grid" justifyItems="center" as="main" p={5}>
         <FeedbackForm title="Please, leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
-            onFeedbackIncrement={this.feedbackIncrement}
+            onLeaveFeedback={this.feedbackIncrement}
           />
         </FeedbackForm>
 
         <FeedbackForm title="Statistics">
-          {
-          total > 0 ? (
+          {total > 0 ? (
             <FeedbackStatistics
               good={good}
               neutral={neutral}
